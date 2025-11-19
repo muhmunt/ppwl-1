@@ -126,6 +126,26 @@
             </ul>
         </li>
 
+        <!-- Kategori -->
+        <li class="menu-item {{ request()->routeIs('category.*') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-category"></i>
+                <div data-i18n="Kategori">Kategori</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ request()->routeIs('category.index') ? 'active' : '' }}">
+                    <a href="{{ route('category.index') }}" class="menu-link">
+                        <div data-i18n="Daftar Kategori">Daftar Kategori</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->routeIs('category.create') || request()->routeIs('category.edit') ? 'active' : '' }}">
+                    <a href="{{ route('category.create') }}" class="menu-link">
+                        <div data-i18n="Tambah Kategori">Tambah Kategori</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
         <!-- Transaksi -->
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Transaksi</span>
