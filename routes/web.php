@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 // User
@@ -17,6 +18,7 @@ Route::get('/dashboard', function () {
 // Products Routes (Admin Only) - Route dengan mode resources
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::resource('/products', ProductController::class);
+    Route::resource('/category', CategoryController::class);
 });
 
 Route::middleware('auth')->group(function () {

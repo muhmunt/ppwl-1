@@ -11,7 +11,7 @@
                     <div class="d-flex align-items-end row">
                         <div class="col-sm-7">
                             <div class="card-body">
-                                <h5 class="card-title text-primary">Welcome {{ Auth::user()->name }}! 🎉</h5>
+                                <h5 class="card-title text-primary">Selamat datang di halaman Dashboard UTS PPWL {{ Auth::user()->name }}! 🎉</h5>
                                 <p class="mb-4">
                                     You're logged in as <span class="fw-bold">{{ ucfirst(Auth::user()->role) }}</span>
                                 </p>
