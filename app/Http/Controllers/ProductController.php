@@ -28,6 +28,15 @@ class ProductController extends Controller
     }
 
     /**
+     * Menampilkan detail produk
+     */
+    public function show(Product $product): View
+    {
+        $product->load('kategori');
+        return view('products.show', compact('product'));
+    }
+
+    /**
      * Menampilkan form tambah produk
      */
     public function create(): View
