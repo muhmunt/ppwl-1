@@ -23,21 +23,10 @@ class CartController extends Controller
     public function add(Product $product)
     {
         $cart = session()->get('cart', []);
-        
-        // Validasi stok
-        if ($product->stok <= 0) {
-            return back()->with('error', 'Stok produk habis!');
-        }
-        
-        // Jika produk sudah ada di cart, increment quantity
-        if (isset($cart[$product->id])) {
-            // Cek apakah quantity yang akan ditambah melebihi stok
-            if ($cart[$product->id]['quantity'] >= $product->stok) {
-                return back()->with('error', 'Stok tidak mencukupi!');
-            }
+
+        if(isset($cart[$product->id])) {
             $cart[$product->id]['quantity']++;
         } else {
-            // Jika produk belum ada di cart, tambahkan baru
             $cart[$product->id] = [
                 "nama" => $product->nama,
                 "quantity" => 1,
@@ -45,11 +34,10 @@ class CartController extends Controller
                 "foto" => $product->foto
             ];
         }
-        
+
         session()->put('cart', $cart);
-        
-        return redirect()->route('cart.index')
-            ->with('success', 'Produk ditambahkan ke keranjang!');
+
+        return redirect()->route('cart.index')->with('success', 'Produk ditambahkan ke keranjang!');
     }
 
     /**
@@ -57,24 +45,14 @@ class CartController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $request->validate([
-            'quantity' => 'required|integer|min:1|max:' . $product->stok
-        ], [
-            'quantity.required' => 'Jumlah produk wajib diisi.',
-            'quantity.integer' => 'Jumlah produk harus berupa angka.',
-            'quantity.min' => 'Jumlah produk minimal 1.',
-            'quantity.max' => 'Jumlah produk tidak boleh melebihi stok yang tersedia.',
-        ]);
-        
         $cart = session()->get('cart', []);
-        
-        if (isset($cart[$product->id])) {
+
+        if(isset($cart[$product->id])) {
             $cart[$product->id]['quantity'] = $request->quantity;
             session()->put('cart', $cart);
         }
-        
-        return redirect()->route('cart.index')
-            ->with('success', 'Jumlah produk diperbarui!');
+
+        return redirect()->route('cart.index')->with('success', 'Jumlah produk diperbarui!');
     }
 
     /**

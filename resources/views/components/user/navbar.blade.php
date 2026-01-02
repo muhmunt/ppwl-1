@@ -10,7 +10,7 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#produk">Produk</a></li>
                 @auth
                 <li class="nav-item"><a class="nav-link" href="{{ route('cart.index') }}">Menu Checkout</a></li>
-                <li class="nav-item"><a class="nav-link" href="">Daftar Pesanan</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('orders.history') }}">Daftar Pesanan</a></li>
                 @endauth
             </ul>
             @guest
